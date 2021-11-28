@@ -26,6 +26,8 @@ body {
   color: inherit;
   display: block;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link:hover,
@@ -34,7 +36,20 @@ body {
 }
 
 .active {
+  position: relative;
   color: var(--accent-color);
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
 }
 
 ul {
@@ -97,7 +112,6 @@ h2 {
   background-color: var(--main-bgc);
 
   border-bottom: 1px solid var(--border-color);
-  padding: 24px 0px;
 }
 
 span {
@@ -113,6 +127,10 @@ span {
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
+}
+
+.header-link {
+  padding: 32px 0px;
 }
 
 .header-item:not(:last-child) {
@@ -141,6 +159,8 @@ span {
   width: 16px;
   height: 12px;
   margin-right: 10px;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .smartphone {
@@ -157,6 +177,8 @@ span {
 .header-contact-list {
   display: flex;
   align-items: center;
+
+  padding: 32px 0px;
 }
 
 .header-contact-list:hover .icon,
@@ -202,6 +224,49 @@ span {
 
   padding: 10px 32px;
   margin-top: 30px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  min-width: 528px;
+  min-height: 581px;
+  padding: 15px;
+
+  background-color: var(--main-bgc);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+  padding: 9px;
+
+  border-radius: 50%;
+  background-color: var(--main-bgc);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /*--------------------ADVANTAGE--------------------*/
@@ -273,8 +338,37 @@ span {
   display: flex;
 }
 
+.work-item {
+  position: relative;
+}
+
 .work-item:not(:last-child) {
   margin-right: 30px;
+}
+
+.work-description {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 70px;
+
+  background: rgba(47, 48, 58, 0.8);
+}
+
+.work-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--third-text-color);
 }
 
 /*--------------------TEAM--------------------*/
@@ -343,6 +437,8 @@ span {
 
   padding: 12px;
   border-radius: 50%;
+
+  transition: background-color 1250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-item:hover,
@@ -361,8 +457,6 @@ span {
 
   width: 20px;
   height: 20px;
-
-  /* padding: 12px; */
 }
 
 /*--------------------CLIENTS--------------------*/
@@ -389,6 +483,8 @@ span {
 
   border: 1px solid var(--border-third-color);
   border-radius: 4px;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .firms-item:hover,
@@ -406,6 +502,8 @@ span {
 
   width: 106px;
   height: 60px;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*--------------------FOOTER--------------------*/
@@ -472,6 +570,8 @@ span {
   border-radius: 50%;
 
   padding: 12px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-social-item:hover,
@@ -513,6 +613,10 @@ span {
   background-color: var(--button-bgc);
 
   padding: 6px 22px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navigation-button:hover,
@@ -537,6 +641,10 @@ span {
   margin-bottom: 30px;
 }
 
+.works-link {
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .works-link:hover,
 .works-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
@@ -549,6 +657,41 @@ span {
 
 .works-item:nth-last-child(-n + 3) {
   margin-bottom: -30px;
+}
+
+.works-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.works-overlay-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  top: 0;
+  left: 0;
+
+  padding: 63px 24px;
+
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+.works-item:hover .works-overlay-card,
+.works-item:focus .works-overlay-card {
+  transform: translateY(0);
+}
+
+.works-overlay-text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;
+
+  color: var(--third-text-color);
 }
 
 .works-description {
