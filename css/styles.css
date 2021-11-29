@@ -234,11 +234,15 @@ span {
   height: 100%;
 
   background-color: rgba(0, 0, 0, 0.2);
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop.is-hidden {
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .modal {
@@ -457,6 +461,7 @@ span {
 
   width: 20px;
   height: 20px;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*--------------------CLIENTS--------------------*/
@@ -681,8 +686,8 @@ span {
   background-color: rgba(33, 150, 243, 0.9);
 }
 
-.works-item:hover .works-overlay-card,
-.works-item:focus .works-overlay-card {
+.works-link:hover .works-overlay-card,
+.works-link:focus .works-overlay-card {
   transform: translateY(0);
 }
 
